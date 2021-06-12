@@ -92,6 +92,6 @@ class Douyin implements AnalysisInterface
         //$this->getDouyin();
         //return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0];
 
-        return DouyinApi::lmengcity($this->url);
+        return DouyinApi::tuanyougou($this->url);
     }
 }

@@ -7,7 +7,7 @@ use Php127\Douyin\HttpClient\HttpClient;
 class DouyinApi
 {
     /**
-     * 使用 mp.lmengcity.com 接口
+     * 使用 tuanyougou.com 接口
      *
      * @param string $url
      *
@@ -15,11 +15,10 @@ class DouyinApi
      *
      * @author 读心印 <aa24615@qq.com>
      */
-    public static function lmengcity(string $url)
+    public static function tuanyougou(string $url)
     {
-        $data = ['url' => $url];
-        $res = HttpClient::postJson('https://mp.lmengcity.com/mp-7/watermark/dy/', $data);
+        $res = HttpClient::get('https://qqq.tuanyougou.com/app/index.php?i=4&t=0&v=2.0&from=wxapp&c=entry&a=wxapp&do=query&m=tommie_duanshiping&url='.urlencode($url));
         $arr = json_decode($res, true);
-        return $arr['mp4'] ?? '';
+        return $arr['data']['downurl'] ?? '';
     }
 }
