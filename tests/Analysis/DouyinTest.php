@@ -5,7 +5,7 @@ namespace Php127\Tests\Analysis;
 use Php127\Douyin\Factory;
 use PHPUnit\Framework\TestCase;
 
-class DouyinTest extends TestCases
+class DouyinTest extends TestCase
 {
     public function setUp(): void
     {

@@ -23,6 +23,13 @@ class HttpClient implements HttpClientInterface
 {
     private static $client = null;
 
+    /**
+     * client.
+     *
+     * @return \GuzzleHttp\Client;
+     *
+     * @author 读心印 <aa24615@qq.com>
+     */
     public static function client()
     {
         if (self::$client == null) {
@@ -43,9 +50,25 @@ class HttpClient implements HttpClientInterface
     {
         $client = self::client();
         $response = $client->get($url);
-        print_r($response);
         return $response->getBody()->getContents();
     }
 
-
+    /**
+     * postJson.
+     *
+     * @param string $url
+     * @param array $data
+     *
+     * @return string
+     *
+     * @author 读心印 <aa24615@qq.com>
+     */
+    public static function postJson(string $url, array $data = [])
+    {
+        $client = self::client();
+        $response = $client->post($url, [
+            'json' => $data
+        ]);
+        return $response->getBody()->getContents();
+    }
 }

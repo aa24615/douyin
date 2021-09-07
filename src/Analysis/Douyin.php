@@ -24,6 +24,7 @@ class Douyin implements AnalysisInterface
 {
     public $html = null;
     public $data = null;
+    public $url = null;
 
     public function __construct(string $url)
     {
@@ -34,6 +35,7 @@ class Douyin implements AnalysisInterface
 
     public function setUrl(string $url)
     {
+        $this->url = $url;
         $this->html = DouyinHttpClient::get($url);
         $this->data = $this->getDouyin();
     }
@@ -87,7 +89,8 @@ class Douyin implements AnalysisInterface
 
     public function getUrl()
     {
-        $this->getDouyin();
-        return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0] ?? '';
+        //$this->getDouyin();
+        //return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0] ?? '';
+        return DouyinApi::tuanyougou($this->url);
     }
 }
