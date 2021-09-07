@@ -46,4 +46,6 @@ class HttpClient implements HttpClientInterface
         print_r($response);
         return $response->getBody()->getContents();
     }
+
+
 }
