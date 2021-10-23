@@ -33,7 +33,8 @@ use Php127\Douyin\Factory;;
 //抖音
 $app = Factory::douyin('https://v.Douyin.com/eeYy4Yo/');
 
-$app = Factory::douyin('https://www.Kuaishou.com/f/X-5mpyftnmn6whKa');
+//快手
+$app = Factory::kuaishou('https://v.kuaishou.com/gcNIRW');
 ```
 
 获取所有信息

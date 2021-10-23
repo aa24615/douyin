@@ -3,6 +3,7 @@
 namespace Php127\Tests\Provider;
 
 use Php127\Douyin\Factory;
+use Php127\Douyin\Provider\Douyin;
 use PHPUnit\Framework\TestCase;
 
 class DouyinTest extends TestCase
@@ -16,7 +17,7 @@ class DouyinTest extends TestCase
 
     public function testGetData()
     {
-        $app = Factory::douyin($this->url);
+        $app = new Douyin($this->url);
         $data = $app->getData();
 
         $this->assertTrue(!empty($data['url']));
@@ -27,25 +28,25 @@ class DouyinTest extends TestCase
 
     public function testGetTitle()
     {
-        $app = Factory::douyin($this->url);
+        $app = new Douyin($this->url);
         $this->assertTrue(!empty($app->getTitle()));
     }
 
     public function testGetUrl()
     {
-        $app = Factory::douyin($this->url);
+        $app = new Douyin($this->url);
         $this->assertTrue(!empty($app->getUrl()));
     }
 
     public function testGetImg()
     {
-        $app = Factory::douyin($this->url);
+        $app = new Douyin($this->url);
         $this->assertTrue(!empty($app->getImg()));
     }
 
     public function testGetMusic()
     {
-        $app = Factory::douyin($this->url);
+        $app = new Douyin($this->url);
         $this->assertTrue(!empty($app->getMusic()));
     }
 }

@@ -20,7 +20,7 @@ use Php127\Douyin\Provider\Kuaishou;
  * @package Php127\Douyin
  *
  * @method Douyin douyin(string $url)
- * @method Kuaishou Kuaishou(string $url)
+ * @method Kuaishou kuaishou(string $url)
  *
  * @author 读心印 <aa24615@qq.com>
  */
