@@ -54,7 +54,7 @@ class Douyin implements ProviderInterface
     {
         if (is_null($this->data)) {
             $videoId = $this->getVideoId();
-            $json = DouyinHttpClient::get("https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=".$videoId);
+            $json = DouyinHttpClient::get("https://www.iesDouyin.com/web/api/v2/aweme/iteminfo/?item_ids=".$videoId);
             $this->data = json_decode($json, true);
         }
 

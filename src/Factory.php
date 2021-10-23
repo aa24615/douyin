@@ -12,7 +12,7 @@
 namespace Php127\Douyin;
 
 use Php127\Douyin\Provider\Douyin;
-use Php127\Douyin\Provider\KuaiShou;
+use Php127\Douyin\Provider\Kuaishou;
 
 /**
  * Factory.
@@ -20,6 +20,7 @@ use Php127\Douyin\Provider\KuaiShou;
  * @package Php127\Douyin
  *
  * @method Douyin douyin(string $url)
+ * @method Kuaishou Kuaishou(string $url)
  *
  * @author 读心印 <aa24615@qq.com>
  */
@@ -30,7 +31,7 @@ class Factory
 
     protected static $providers = [
         'douyin' => Douyin::class,
-        'kuaishou' => KuaiShou::class
+        'kuaishou' => Kuaishou::class
     ];
 
     /**

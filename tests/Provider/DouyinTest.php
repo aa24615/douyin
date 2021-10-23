@@ -1,6 +1,6 @@
 <?php
 
-namespace Php127\Tests\Analysis;
+namespace Php127\Tests\Provider;
 
 use Php127\Douyin\Factory;
 use PHPUnit\Framework\TestCase;

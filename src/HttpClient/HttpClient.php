@@ -19,7 +19,7 @@ use GuzzleHttp\Client;
  *
  * @author 读心印 <aa24615@qq.com>
  */
-class HttpClient implements HttpClientInterface
+class HttpClient
 {
     private static $client = null;
 
