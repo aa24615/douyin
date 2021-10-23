@@ -9,9 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Php127\Douyin\Analysis;
+namespace Php127\Douyin\Provider;
 
 use Php127\Douyin\HttpClient\DouyinHttpClient;
+use Php127\Douyin\Provider\Duoyin\TuanYouGou;
+use Php127\Douyin\ProviderInterface;
 
 /**
  * Douyin.
@@ -20,7 +22,7 @@ use Php127\Douyin\HttpClient\DouyinHttpClient;
  *
  * @author 读心印 <aa24615@qq.com>
  */
-class Douyin implements AnalysisInterface
+class Douyin implements ProviderInterface
 {
     public $html = null;
     public $data = null;
@@ -31,7 +33,6 @@ class Douyin implements AnalysisInterface
         $this->setUrl($url);
         return $this;
     }
-
 
     public function setUrl(string $url)
     {
@@ -89,9 +90,10 @@ class Douyin implements AnalysisInterface
 
     public function getUrl()
     {
+        //失效了
         //$this->getDouyin();
         //return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0];
 
-        return DouyinApi::tuanyougou($this->url);
+        return TuanYouGou::getUrl($this->url);
     }
 }

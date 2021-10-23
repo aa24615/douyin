@@ -2,7 +2,7 @@
 
 namespace Analysis;
 
-use Php127\Douyin\Analysis\DouyinApi;
+use Php127\Douyin\Provider\DouyinApi;
 use PHPUnit\Framework\TestCase;
 
 class DouyinApiTest extends TestCase
