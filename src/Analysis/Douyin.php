@@ -43,10 +43,10 @@ class Douyin implements AnalysisInterface
     private function getVideoId()
     {
         preg_match('/href="(.*?)">Found/', $this->html, $matches);
-        $url_share = $matches[1];
+        $url_share = $matches[1] ?? '';
         preg_match('/video\/(.*?)\//', $url_share, $matches);
 
-        return $matches[1];
+        return $matches[1] ?? '';
     }
 
     private function getDouyin()
@@ -73,25 +73,24 @@ class Douyin implements AnalysisInterface
     public function getMusic()
     {
         $this->getDouyin();
-        return $this->data['item_list'][0]['music']['play_url']['url_list'][0];
+        return $this->data['item_list'][0]['music']['play_url']['url_list'][0] ?? '';
     }
 
     public function getImg()
     {
         $this->getDouyin();
-        return $this->data['item_list'][0]['video']['origin_cover']['url_list'][0];
+        return $this->data['item_list'][0]['video']['origin_cover']['url_list'][0] ?? '';
     }
     public function getTitle()
     {
         $this->getDouyin();
-        return $this->data['item_list'][0]['desc'];
+        return $this->data['item_list'][0]['desc'] ?? '';
     }
 
     public function getUrl()
     {
         //$this->getDouyin();
-        //return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0];
-
+        //return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0] ?? '';
         return DouyinApi::tuanyougou($this->url);
     }
 }
