@@ -9,16 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Php127\Douyin\Analysis;
+namespace Php127\Douyin;
 
 /**
- * AnalysisInterface.
- *
- * @package Php127\Douyin\Analysis
- *
- * @author 读心印 <aa24615@qq.com>
+ * Interface ProviderInterface
+ * @package Php127\Douyin
  */
-interface AnalysisInterface
+interface ProviderInterface
 {
     public function setUrl(string $url);
     public function getData();

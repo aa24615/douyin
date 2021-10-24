@@ -11,7 +11,8 @@
 
 namespace Php127\Douyin;
 
-use Php127\Douyin\Analysis\Douyin;
+use Php127\Douyin\Provider\Douyin;
+use Php127\Douyin\Provider\Kuaishou;
 
 /**
  * Factory.
@@ -19,6 +20,7 @@ use Php127\Douyin\Analysis\Douyin;
  * @package Php127\Douyin
  *
  * @method Douyin douyin(string $url)
+ * @method Kuaishou kuaishou(string $url)
  *
  * @author 读心印 <aa24615@qq.com>
  */
@@ -26,21 +28,35 @@ use Php127\Douyin\Analysis\Douyin;
 
 class Factory
 {
+    protected static $providers = [
+        'douyin' => Douyin::class,
+        'kuaishou' => Kuaishou::class
+    ];
+
     /**
      * @param string $name
-     * @param array  $config
+     * @param string $value
      *
+     * @return ProviderInterface
+     *
+     * @author 读心印 <aa24615@qq.com>
      */
-    public static function make($name, $value)
+    public static function make(string $name, string $value)
     {
-        $namespace = ucfirst($name);
-
-        $application = "\\Php127\\Douyin\\Analysis\\{$namespace}";
-
-        return new $application($value);
+        return new self::$providers[$name]($value);
     }
 
-    public static function __callStatic($name, $arguments)
+    /**
+     * __callStatic.
+     *
+     * @param static $name
+     * @param array $arguments
+     *
+     * @return Factory|ProviderInterface
+     *
+     * @author 读心印 <aa24615@qq.com>
+     */
+    public static function __callStatic(string $name, $arguments)
     {
         return self::make($name, ...$arguments);
     }

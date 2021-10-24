@@ -17,7 +17,7 @@ namespace Php127\Douyin\HttpClient;
  *
  * @author 读心印 <aa24615@qq.com>
  */
-class DouyinHttpClient implements HttpClientInterface
+class DouyinHttpClient
 {
     public static function get(string $url)
     {

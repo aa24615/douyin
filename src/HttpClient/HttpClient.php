@@ -19,7 +19,7 @@ use GuzzleHttp\Client;
  *
  * @author 读心印 <aa24615@qq.com>
  */
-class HttpClient implements HttpClientInterface
+class HttpClient
 {
     private static $client = null;
 
@@ -45,11 +45,17 @@ class HttpClient implements HttpClientInterface
         return self::$client;
     }
 
-
-    public static function get(string $url)
+    public static function get(string $url, array $options = [])
     {
         $client = self::client();
-        $response = $client->get($url);
+        $response = $client->get($url, $options);
+        return $response->getBody()->getContents();
+    }
+
+    public static function post(string $url, $data)
+    {
+        $client = self::client();
+        $response = $client->post($url, $data);
         return $response->getBody()->getContents();
     }
 
