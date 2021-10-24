@@ -2,7 +2,6 @@
 
 namespace Php127\Tests\Provider;
 
-use Php127\Douyin\Factory;
 use Php127\Douyin\Provider\Douyin;
 use PHPUnit\Framework\TestCase;
 

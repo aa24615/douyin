@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Php127\Tests\Provider;
-
 
 use Php127\Douyin\Provider\Kuaishou;
 use PHPUnit\Framework\TestCase;
@@ -16,9 +14,8 @@ class KuaishouTest extends TestCase
         $this->url = 'https://v.kuaishou.com/gcNIRW';
     }
 
-    public function testGetData(){
-
+    public function testGetData()
+    {
         $app = new Kuaishou($this->url);
-
     }
 }

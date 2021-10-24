@@ -14,7 +14,6 @@ use Php127\Douyin\ProviderInterface;
  */
 class Kuaishou implements ProviderInterface
 {
-
     public $html = null;
     public $data = null;
     public $url = null;
@@ -34,7 +33,6 @@ class Kuaishou implements ProviderInterface
     }
     public function getData()
     {
-
     }
     public function getTitle()
     {

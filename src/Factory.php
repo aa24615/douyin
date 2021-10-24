@@ -28,7 +28,6 @@ use Php127\Douyin\Provider\Kuaishou;
 
 class Factory
 {
-
     protected static $providers = [
         'douyin' => Douyin::class,
         'kuaishou' => Kuaishou::class
@@ -36,15 +35,28 @@ class Factory
 
     /**
      * @param string $name
-     * @param array  $config
+     * @param string $value
      *
+     * @return ProviderInterface
+     *
+     * @author 读心印 <aa24615@qq.com>
      */
-    public static function make($name, $value)
+    public static function make(string $name, string $value)
     {
         return new self::$providers[$name]($value);
     }
 
-    public static function __callStatic($name, $arguments)
+    /**
+     * __callStatic.
+     *
+     * @param static $name
+     * @param array $arguments
+     *
+     * @return Factory|ProviderInterface
+     *
+     * @author 读心印 <aa24615@qq.com>
+     */
+    public static function __callStatic(string $name, $arguments)
     {
         return self::make($name, ...$arguments);
     }

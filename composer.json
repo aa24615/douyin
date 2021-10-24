@@ -1,10 +1,10 @@
 {
   "name": "php127/douyin",
-  "description": "抖音去水印",
+  "description": "php视频去水印 抖音去水印 快手去水印",
   "keywords": [
     "抖音去水印",
     "视频去水印",
-    "抖音解析"
+    "快手去水印"
   ],
   "type": "library",
   "license": "MIT",
@@ -16,7 +16,7 @@
   ],
   "require": {
     "php": ">=7.3",
-    "guzzlehttp/guzzle": "^7.2"
+    "guzzlehttp/guzzle": "^6|^7.2"
   },
   "autoload": {
     "psr-4": {

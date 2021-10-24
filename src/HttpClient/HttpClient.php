@@ -53,6 +53,13 @@ class HttpClient
         return $response->getBody()->getContents();
     }
 
+    public static function post(string $url, $data)
+    {
+        $client = self::client();
+        $response = $client->post($url, $data);
+        return $response->getBody()->getContents();
+    }
+
     /**
      * postJson.
      *
