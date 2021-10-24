@@ -17,5 +17,35 @@ class KuaishouTest extends TestCase
     public function testGetData()
     {
         $app = new Kuaishou($this->url);
+        $data = $app->getData();
+
+        $this->assertTrue(!empty($data['url']));
+        $this->assertTrue(!empty($data['img']));
+        $this->assertTrue(!empty($data['music']));
+        $this->assertTrue(!empty($data['title']));
+    }
+
+    public function testGetTitle()
+    {
+        $app = new Kuaishou($this->url);
+        $this->assertTrue(!empty($app->getTitle()));
+    }
+
+    public function testGetUrl()
+    {
+        $app = new Kuaishou($this->url);
+        $this->assertTrue(!empty($app->getUrl()));
+    }
+
+    public function testGetImg()
+    {
+        $app = new Kuaishou($this->url);
+        $this->assertTrue(!empty($app->getImg()));
+    }
+
+    public function testGetMusic()
+    {
+        $app = new Kuaishou($this->url);
+        $this->assertTrue(!empty($app->getMusic()));
     }
 }

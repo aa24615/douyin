@@ -21,12 +21,29 @@ class FactoryTest extends TestCase
         $this->assertTrue(!empty($data['img']));
         $this->assertTrue(!empty($data['music']));
         $this->assertTrue(!empty($data['title']));
+
+        $this->assertTrue(!empty($app->getTitle()));
+        $this->assertTrue(!empty($app->getUrl()));
+        $this->assertTrue(!empty($app->getImg()));
+        $this->assertTrue(!empty($app->getMusic()));
     }
 
     public function testKuaishou()
     {
-        $app = Factory::kuaishou('http://www.baidu.com');
+        $app = Factory::kuaishou('https://v.kuaishou.com/gcNIRW');
 
         $this->assertInstanceOf(Kuaishou::class, $app);
+
+        $data = $app->getData();
+
+        $this->assertTrue(!empty($data['url']));
+        $this->assertTrue(!empty($data['img']));
+        $this->assertTrue(!empty($data['music']));
+        $this->assertTrue(!empty($data['title']));
+
+        $this->assertTrue(!empty($app->getTitle()));
+        $this->assertTrue(!empty($app->getUrl()));
+        $this->assertTrue(!empty($app->getImg()));
+        $this->assertTrue(!empty($app->getMusic()));
     }
 }

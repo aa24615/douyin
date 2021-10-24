@@ -45,11 +45,10 @@ class HttpClient
         return self::$client;
     }
 
-
-    public static function get(string $url)
+    public static function get(string $url, array $options = [])
     {
         $client = self::client();
-        $response = $client->get($url);
+        $response = $client->get($url, $options);
         return $response->getBody()->getContents();
     }
 
