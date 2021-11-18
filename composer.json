@@ -29,7 +29,7 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
+    "phpunit/phpunit": "^8.0|^9.0",
     "friendsofphp/php-cs-fixer": "^2.18"
   },
   "scripts": {
