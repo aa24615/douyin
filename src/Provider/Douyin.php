@@ -12,7 +12,6 @@
 namespace Php127\Douyin\Provider;
 
 use Php127\Douyin\HttpClient\DouyinHttpClient;
-use Php127\Douyin\Provider\Duoyin\TuanYouGou;
 use Php127\Douyin\ProviderInterface;
 
 /**
@@ -54,7 +53,7 @@ class Douyin implements ProviderInterface
     {
         if (is_null($this->data)) {
             $videoId = $this->getVideoId();
-            $json = DouyinHttpClient::get("https://www.iesDouyin.com/web/api/v2/aweme/iteminfo/?item_ids=".$videoId);
+            $json = DouyinHttpClient::get("https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=".$videoId);
             $this->data = json_decode($json, true);
         }
 
@@ -90,10 +89,18 @@ class Douyin implements ProviderInterface
 
     public function getUrl()
     {
-        //失效了
-        //$this->getDouyin();
-        //return $this->data['item_list'][0]["video"]["play_addr"]["url_list"][0];
+        $this->getDouyin();
 
-        return TuanYouGou::getUrl($this->url);
+        $vid = $this->data['item_list'][0]['video']['vid'] ?? "";
+
+        if ($vid == '') {
+            return '';
+        }
+
+        $ratio = $this->data['item_list'][0]['video']['ratio'] ?? '540p';
+
+        $link = "https://aweme.snssdk.com/aweme/v1/play/?video_id={$vid}&line=0&ratio={$ratio}&media_type=4&vr_type=0&improve_bitrate=0&is_play_url=1&is_support_h265=0&source=PackSourceEnum_PUBLISH";
+
+        return $link;
     }
 }
