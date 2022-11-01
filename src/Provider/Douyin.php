@@ -103,4 +103,19 @@ class Douyin implements ProviderInterface
 
         return $link;
     }
+
+    public function getRaw(){
+        return json_encode($this->data);
+    }
+
+    public function getImages(){
+
+        $list = $this->data['item_list'][0]['images'];
+        $data = [];
+        foreach ($list as $val){
+            $data[] = $val['url_list'][0];
+        }
+
+        return $data;
+    }
 }

@@ -14,6 +14,15 @@ class DouyinTest extends TestCase
         $this->url = 'https://v.douyin.com/dj4UA2x/';
     }
 
+    public function testGetDataImage()
+    {
+        $app = new Douyin('https://v.douyin.com/MnHDXhK/');
+        $data = $app->getImages();
+
+        $this->assertTrue(count($data)>0);
+    }
+
+
     public function testGetData()
     {
         $app = new Douyin($this->url);
