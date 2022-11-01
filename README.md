@@ -68,6 +68,9 @@ $app->getMusic();
 //获取无水印url
 $app->getUrl();
 
+//获取图文类型中的图片
+$app->getImages();
+
 ```
 
 重新设置url
