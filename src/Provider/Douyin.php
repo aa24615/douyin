@@ -67,6 +67,7 @@ class Douyin implements ProviderInterface
             'url' => $this->getUrl(),
             'img' => $this->getImg(),
             'music' => $this->getMusic(),
+            'image' => $this->getImages()
         ];
     }
 
@@ -109,11 +110,12 @@ class Douyin implements ProviderInterface
     }
 
     public function getImages(){
-
-        $list = $this->data['item_list'][0]['images'];
         $data = [];
-        foreach ($list as $val){
-            $data[] = $val['url_list'][0];
+        if(isset($this->data['item_list'][0]['images'])){
+            $list = $this->data['item_list'][0]['images'];
+            foreach ($list as $val){
+                $data[] = $val['url_list'][0];
+            }
         }
 
         return $data;
