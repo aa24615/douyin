@@ -29,7 +29,6 @@ class DouyinTest extends TestCase
     {
         $app = new Douyin($this->url);
         $data = $app->getData();
-        print_r($data);
 
         $this->assertTrue(!empty($data['url']));
         $this->assertTrue(!empty($data['img']));
