@@ -12,6 +12,7 @@
 namespace Php127\Douyin\Provider;
 
 use Php127\Douyin\HttpClient\DouyinHttpClient;
+use Php127\Douyin\HttpClient\HttpClient;
 use Php127\Douyin\ProviderInterface;
 
 /**
@@ -36,26 +37,33 @@ class Douyin implements ProviderInterface
     public function setUrl(string $url)
     {
         $this->url = $url;
-        $this->html = DouyinHttpClient::get($url);
         $this->data = $this->getDouyin();
     }
 
-    private function getVideoId()
-    {
-        preg_match('/href="(.*?)">Found/', $this->html, $matches);
-        $url_share = $matches[1];
-        preg_match('/video\/(.*?)\//', $url_share, $matches);
-
-        return $matches[1];
+    private function getContents(string $url){
+        stream_context_set_default( [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+        ]);
+        $header = get_headers($url,1);
+        $location = explode('/',$header['Location']);
+        $body = HttpClient::get('https://www.iesdouyin.com/aweme/v1/web/aweme/detail/?aweme_id='.$location[5]);
+        return $body;
     }
+
 
     private function getDouyin()
     {
         if (is_null($this->data)) {
-            $videoId = $this->getVideoId();
-            $json = DouyinHttpClient::get("https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=".$videoId);
-            $this->data = json_decode($json, true);
+            $this->html = $this->getContents($this->url);
+//            var_dump($this->html);
+            $this->data = json_decode($this->html, true);
+
+            //print_r($this->data);
         }
+
 
         return $this->data;
     }
@@ -74,39 +82,35 @@ class Douyin implements ProviderInterface
     public function getMusic()
     {
         $this->getDouyin();
-        return $this->data['item_list'][0]['music']['play_url']['url_list'][0] ?? '';
+        return $this->data['aweme_detail']['music']['play_url']['url_list'][0] ?? '';
     }
 
     public function getImg()
     {
         $this->getDouyin();
-        return $this->data['item_list'][0]['video']['origin_cover']['url_list'][0] ?? '';
+        return $this->data['aweme_detail']['video']['origin_cover']['url_list'][0] ?? '';
     }
     public function getTitle()
     {
         $this->getDouyin();
-        return $this->data['item_list'][0]['desc'] ?? '';
+        return $this->data['aweme_detail']['desc'] ?? '';
     }
 
     public function getUrl()
     {
         $this->getDouyin();
 
-        $vid = $this->data['item_list'][0]['video']['vid'] ?? "";
-
-        if ($vid == '') {
-            return '';
-        }
-
-        $ratio = $this->data['item_list'][0]['video']['ratio'] ?? '540p';
-
-        $link = "https://aweme.snssdk.com/aweme/v1/play/?video_id={$vid}&line=0&ratio={$ratio}&media_type=4&vr_type=0&improve_bitrate=0&is_play_url=1&is_support_h265=0&source=PackSourceEnum_PUBLISH";
+        $link = $this->data['aweme_detail']['video']['play_addr']['url_list'][0] ?? "";
 
         return $link;
     }
 
     public function getRaw(){
         return json_encode($this->data);
+    }
+
+    public function getHtml(){
+        return $this->html;
     }
 
     public function getImages(){

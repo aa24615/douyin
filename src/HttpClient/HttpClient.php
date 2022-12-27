@@ -56,6 +56,7 @@ class HttpClient
     {
         $client = self::client();
         $response = $client->post($url, $data);
+
         return $response->getBody()->getContents();
     }
 
