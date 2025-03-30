@@ -48,9 +48,16 @@ class Douyin implements ProviderInterface
             ],
         ]);
         $header = get_headers($url,1);
-        $location = explode('/',$header['Location']);
-        $body = HttpClient::get('https://www.iesdouyin.com/aweme/v1/web/aweme/detail/?aweme_id='.$location[5]);
-        return $body;
+        $location = $header['Location'][0];
+
+        $explode = explode('/',$location);
+        $id = $explode[5];
+
+        $body = HttpClient::get('https://www.iesdouyin.com/share/video/'.$id);
+        $pattern = '/window\._ROUTER_DATA\s*=\s*(.*?)\<\/script>/s';
+
+        preg_match($pattern, $body, $matches);
+        return trim($matches[1]);
     }
 
 
@@ -82,25 +89,27 @@ class Douyin implements ProviderInterface
     public function getMusic()
     {
         $this->getDouyin();
-        return $this->data['aweme_detail']['music']['play_url']['url_list'][0] ?? '';
+        return $this->data['loaderData']['video_(id)/page']['videoInfoRes']['item_list'][0]['music']['cover_large']['url_list'][0] ?? '';
     }
 
     public function getImg()
     {
         $this->getDouyin();
-        return $this->data['aweme_detail']['video']['origin_cover']['url_list'][0] ?? '';
+        return $this->data['loaderData']['video_(id)/page']['videoInfoRes']['item_list'][0]['video']['cover']['url_list'][0] ?? '';
     }
     public function getTitle()
     {
         $this->getDouyin();
-        return $this->data['aweme_detail']['desc'] ?? '';
+        return $this->data['loaderData']['video_(id)/page']['videoInfoRes']['item_list'][0]['desc'] ?? '';
     }
 
     public function getUrl()
     {
         $this->getDouyin();
 
-        $link = $this->data['aweme_detail']['video']['play_addr']['url_list'][0] ?? "";
+        $link = $this->data['loaderData']['video_(id)/page']['videoInfoRes']['item_list'][0]['video']['play_addr']['url_list'][0] ?? "";
+
+        $link = str_replace('playwm', 'play',$link);
 
         return $link;
     }
@@ -114,12 +123,13 @@ class Douyin implements ProviderInterface
     }
 
     public function getImages(){
+        $this->getDouyin();
+
         $data = [];
-        if(isset($this->data['item_list'][0]['images'])){
-            $list = $this->data['item_list'][0]['images'];
-            foreach ($list as $val){
-                $data[] = $val['url_list'][0] ?? '';
-            }
+
+        $list = $this->data['loaderData']['video_(id)/page']['videoInfoRes']['item_list'][0]['images'] ?? [];
+        foreach ($list as $val){
+            $data[] = $val['url_list'][0];
         }
 
         return $data;
